@@ -21,19 +21,39 @@ app.use((req, res, next) => {
 
 app.use("/api/cars", carsRoutes);
 
-mongoose
-	.connect(
-    'mongodb+srv://Yors:Jorg0382@cluster0.bwxsv.mongodb.net/cars-api?retryWrites=true&w=majority',
-		{
-			useNewUrlParser: true,
-			useUnifiedTopology: true,
-			useCreateIndex: true
-		}
-	)
-	.then(() => {
-    const port = process.env.port || 5000
-		app.listen(port, () => console.log("listening on port 5000"))
-	})
-	.catch((err) => {
-		console.log(err)
-	})
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useUnifiedTopology', true);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
+mongoose.connect(process.env.DATABASEURL)
+.then(()=>{
+    console.log("Connected to DB!")
+}).catch(err=>{
+    console.log("ERROR:", err.message )
+})
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 5000;
+}
+
+app.listen(port, ()=>{
+    console.log("System running!")
+})
+
+// mongoose
+// 	.connect(
+//     'mongodb+srv://Yors:Jorg0382@cluster0.bwxsv.mongodb.net/cars-api?retryWrites=true&w=majority',
+// 		{
+// 			useNewUrlParser: true,
+// 			useUnifiedTopology: true,
+// 			useCreateIndex: true
+// 		}
+// 	)
+// 	.then(() => {
+//     const port = process.env.port || 5000
+// 		app.listen(port, () => console.log("listening on port 5000"))
+// 	})
+// 	.catch((err) => {
+// 		console.log(err)
+// 	})
