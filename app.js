@@ -19,13 +19,13 @@ app.use((req, res, next) => {
 	next()
 });
 
-app.use("/api/cars", carsRoutes);
+app.use("/", carsRoutes);
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
-mongoose.connect(process.env.DATABASEURL)
+mongoose.connect('mongodb+srv://Yors:Jorg0382@cluster0.bwxsv.mongodb.net/cars-api?retryWrites=true&w=majority')
 .then(()=>{
     console.log("Connected to DB!")
 }).catch(err=>{
