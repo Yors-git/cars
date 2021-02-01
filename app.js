@@ -23,7 +23,7 @@ app.use("/api/cars", carsRoutes);
 
 mongoose
 	.connect(
-    process.env.DATABASEURL,
+    'mongodb+srv://Yors:Jorg0382@cluster0.bwxsv.mongodb.net/cars-api?retryWrites=true&w=majority',
 		{
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
